@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Split et merge PDF</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+<div class="container">
+    <!-- Page Content goes here -->
+    <div class="center-align titre">Salut Papounet</div>
+
+    <form enctype=multipart/form-data method="post">
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Fichiers</span>
+                <input type="file" multiple accept="application/pdf" name="files">
+            </div>
+            <div class="file-path-wrapper">
+                <label>
+                    <input class="file-path validate" type="text" placeholder="Upload des fichiers pdf source">
+                </label>
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Générer PDF
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

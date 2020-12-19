@@ -27,6 +27,9 @@ def clean():
     files = glob.glob('Target/*')
     for f in files:
         os.remove(f)
+    files = glob.glob('Source/*')
+    for f in files:
+        os.remove(f)
 
 
 def merger(output_path, input_paths):
@@ -51,21 +54,22 @@ def write_all_pages(input_path):
             output.write(outputStream)
 
 
-source_pdf_files = glob.glob("Source/*.pdf")
+def run():
+    source_pdf_files = glob.glob("Source/*.pdf")
 
-number_of_pages = get_num_pages(source_pdf_files)
+    number_of_pages = get_num_pages(source_pdf_files)
 
-for j in source_pdf_files:
-    write_all_pages(j)
+    for j in source_pdf_files:
+        write_all_pages(j)
 
-for p in range(1, number_of_pages + 1):
-    paths = glob.glob("Target/" + "*_page" + ("0" if p < 10 else "") + "%s.pdf" % str(p))
+    for p in range(1, number_of_pages + 1):
+        paths = glob.glob("Target/" + "*_page" + ("0" if p < 10 else "") + "%s.pdf" % str(p))
+        paths.sort()
+        output_file_path = "Merge/Page" + ("0" if p < 10 else "") + str(p) + ".pdf"
+        merger(output_file_path, paths)
+
+    paths = glob.glob('Merge/Page*.pdf')
     paths.sort()
-    output_file_path = "Merge/Page" + ("0" if p < 10 else "") + str(p) + ".pdf"
-    merger(output_file_path, paths)
+    merger('Document_Final.pdf', paths)
 
-paths = glob.glob('Merge/Page*.pdf')
-paths.sort()
-merger('Document_Final.pdf', paths)
-
-clean()
+    clean()
