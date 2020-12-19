@@ -68,4 +68,4 @@ paths = glob.glob('Merge/Page*.pdf')
 paths.sort()
 merger('Document_Final_Page.pdf', paths)
 
-# clean()
+clean()
