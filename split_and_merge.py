@@ -32,11 +32,13 @@ def write_all_pages(input_path):
     for i in range(inputpdf.numPages):
         output = PdfFileWriter()
         output.addPage(inputpdf.getPage(i))
-        with open("Target/" + input_path + "_page%s.pdf" % (i + 1), "wb") as outputStream:
+        with open("Target/" + input_path.split("/")[1] + "_page%s.pdf" % (i + 1), "wb") as outputStream:
             output.write(outputStream)
 
 
-for j in sys.argv[1:]:
+source_pdf_files = glob.glob("Source/*.pdf")
+
+for j in source_pdf_files:
     print("Le Nom du fichier est ", j)
     write_all_pages(j)
 
