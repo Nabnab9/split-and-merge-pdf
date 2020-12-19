@@ -42,7 +42,12 @@ def write_all_pages(input_path):
     for i in range(inputpdf.numPages):
         output = PdfFileWriter()
         output.addPage(inputpdf.getPage(i))
-        with open("Target/" + input_path.split("/")[1] + "_page"+("", "0")[i + 1 < 10]+"%s.pdf" % (i + 1), "wb") as outputStream:
+        with open("Target/"
+                  + input_path.split("/")[1]
+                  + "_page"
+                  + ("0" if i + 1 < 10 else "")
+                  + "%s.pdf" % (i + 1),
+                  "wb") as outputStream:
             output.write(outputStream)
 
 
@@ -56,11 +61,11 @@ for j in source_pdf_files:
 for p in range(1, number_of_pages + 1):
     paths = glob.glob("Target/" + "*_page%s.pdf" % str(p))
     paths.sort()
-    output_file_path = "Merge/Page" + ("", "0")[p < 10] + str(p) + ".pdf"
+    output_file_path = "Merge/Page" + ("0" if p < 10 else "") + str(p) + ".pdf"
     merger(output_file_path, paths)
 
 paths = glob.glob('Merge/Page*.pdf')
 paths.sort()
 merger('Document_Final_Page.pdf', paths)
 
-clean()
+# clean()
