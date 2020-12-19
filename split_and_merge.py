@@ -59,7 +59,7 @@ for j in source_pdf_files:
     write_all_pages(j)
 
 for p in range(1, number_of_pages + 1):
-    paths = glob.glob("Target/" + "*_page%s.pdf" % str(p))
+    paths = glob.glob("Target/" + "*_page" + ("0" if p < 10 else "") + "%s.pdf" % str(p))
     paths.sort()
     output_file_path = "Merge/Page" + ("0" if p < 10 else "") + str(p) + ".pdf"
     merger(output_file_path, paths)
