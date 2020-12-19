@@ -66,6 +66,6 @@ for p in range(1, number_of_pages + 1):
 
 paths = glob.glob('Merge/Page*.pdf')
 paths.sort()
-merger('Document_Final_Page.pdf', paths)
+merger('Document_Final.pdf', paths)
 
 clean()
