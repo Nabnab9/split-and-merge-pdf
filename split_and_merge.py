@@ -57,7 +57,8 @@ for j in source_pdf_files:
 for p in range(1, number_of_pages + 1):
     paths = glob.glob("Target/" + "*_page%s.pdf" % str(p))
     paths.sort()
-    merger('Merge/Page' + str(p) + ".pdf", paths)
+    output_file_path = "Merge/Page" + ("0" if p < 10 else "") + str(p) + ".pdf"
+    merger(output_file_path, paths)
 
 paths = glob.glob('Merge/Page*.pdf')
 paths.sort()
