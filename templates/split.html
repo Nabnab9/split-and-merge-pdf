@@ -7,28 +7,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
 </head>
 <body>
-<div class="container">
-    <!-- Page Content goes here -->
-    <div class="center-align titre">Salut Papounet</div>
-
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper light-blue lighten-2">
+            <a href="#" class="brand-logo center">Salut Papounet</a>
+        </div>
+    </nav>
+</div>
+<div class="container margin-top">
     <form enctype=multipart/form-data method="post">
-        <div class="file-field input-field">
-            <div class="btn light-blue lighten-2">
-                <span>Fichiers</span>
-                <input type="file" multiple accept="application/pdf" name="files">
+        <div class="row  valign-wrapper">
+            <div class="col s9">
+                <div class="file-field input-field">
+                    <div class="btn light-blue lighten-2">
+                        <i class="material-icons left">attach_file</i>
+                        <span>Fichiers</span>
+                        <input type="file" multiple accept="application/pdf" name="files">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <label>
+                            <input class="file-path validate" type="text" placeholder="Dépose tes fichiers .pdf ici">
+                        </label>
+                    </div>
+
+                </div>
             </div>
-            <div class="file-path-wrapper">
-                <label>
-                    <input class="file-path validate" type="text" placeholder="Upload des fichiers pdf source">
-                </label>
+            <div class="col s3">
+                <button class="btn waves-effect waves-light light-blue lighten-2" type="submit" name="action">
+                    Générer
+                    PDF
+                    <i class="material-icons right">send</i>
+                </button>
             </div>
         </div>
-        <button class="btn waves-effect waves-light light-blue lighten-2" type="submit" name="action">Générer PDF
-            <i class="material-icons right">send</i>
-        </button>
     </form>
 </div>
 
