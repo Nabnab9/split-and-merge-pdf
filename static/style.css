@@ -1,5 +1,15 @@
 .margin-top {
-    margin-top: 215px;
+    margin-top: 150px;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 .progress-bar {
@@ -29,11 +39,7 @@
     border-bottom: 1px solid #4fc3f7;
     box-shadow: 0 1px 0 0 #4fc3f7;
 }
-/* invalid color */
-.input-field input[type=text].invalid {
-    border-bottom: 1px solid #4fc3f7;
-    box-shadow: 0 1px 0 0 #4fc3f7;
-}
+
 /* icon prefix focus color */
 .input-field .prefix.active {
     color: #4fc3f7;

@@ -11,68 +11,87 @@
 
 </head>
 <body>
-<div class="navbar-fixed">
-    <nav>
-        <div class="nav-wrapper light-blue lighten-2">
-            <a href="#" class="brand-logo center">Salut Papounet</a>
-        </div>
-    </nav>
-</div>
-<div class="container input-container z-depth-3 margin-top" >
-    <form enctype=multipart/form-data method="post" id="formulaire">
-        <div class="row">
-            <div class="input-field col s5">
-                <i class="material-icons prefix">date_range</i>
-                <input placeholder="Sous la forme AAAAMM (ex : 202012)" id="date" name="date" type="text" class="validate">
-                <label for="date">Année + mois</label>
+<main>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper light-blue lighten-2">
+                <a href="#" class="brand-logo center">Salut Papounet</a>
             </div>
-            <div class="col s2"></div>
-            <div class="input-field col s5">
-                <i class="material-icons prefix">content_copy</i>
-                <input placeholder="4" id="nb" value="4" name="nb" min="1" type="number" class="validate">
-                <label for="nb">Nombre de documents différents</label>
-            </div>
-        </div>
-        <div class="row  valign-wrapper">
-            <div class="col s12">
-                <div class="file-field input-field">
-                    <div class="btn light-blue lighten-2">
-                        <i class="material-icons left">attach_file</i>
-                        <span>Fichiers</span>
-                        <input type="file" multiple accept="application/pdf" name="files">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <label>
-                            <input class="file-path validate" type="text" placeholder="Dépose tes fichiers .pdf ici">
-                        </label>
-                    </div>
-
+        </nav>
+    </div>
+    <div class="container input-container z-depth-3 margin-top">
+        <form enctype=multipart/form-data method="post" id="formulaire">
+            <div class="row">
+                <div class="input-field col s5">
+                    <i class="material-icons prefix">date_range</i>
+                    <input placeholder="Sous la forme AAAAMM (ex : 202012)" id="date" name="date" type="text"
+                           class="validate">
+                    <label for="date">Année + mois</label>
+                </div>
+                <div class="col s2"></div>
+                <div class="input-field col s5">
+                    <i class="material-icons prefix">content_copy</i>
+                    <input placeholder="4" id="nb" value="4" name="nb" min="1" type="number" class="validate">
+                    <label for="nb">Nombre de documents différents</label>
                 </div>
             </div>
-        </div>
+            <div class="row  valign-wrapper">
+                <div class="col s12">
+                    <div class="file-field input-field">
+                        <div class="btn light-blue lighten-2">
+                            <i class="material-icons left">attach_file</i>
+                            <span>Fichiers</span>
+                            <input type="file" multiple accept="application/pdf" name="files">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <label>
+                                <input class="file-path validate" type="text"
+                                       placeholder="Dépose tes fichiers .pdf ici">
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s5"></div>
+                <div class="col s2">
+                    <button class="btn waves-effect waves-light light-blue lighten-2" type="submit" name="action"
+                            onclick="mafonction()">
+                        Générer PDF
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+                <div class="col s5"></div>
+            </div>
+        </form>
         <div class="row">
             <div class="col s5"></div>
             <div class="col s2">
-                <button class="btn waves-effect waves-light light-blue lighten-2" type="submit" name="action" onclick="mafonction()">
-                    Générer
-                    PDF
-                    <i class="material-icons right">send</i>
-                </button>
+                <div id="loader" class="progress light-blue lighten-2" style="display: none">
+                    <div class="indeterminate progress-bar"></div>
+                </div>
             </div>
             <div class="col s5"></div>
         </div>
-    </form>
-    <div class="row">
-        <div class="col s5"></div>
-        <div class="col s2">
-            <div id="loader" class="progress light-blue lighten-2" style="display: none">
-                <div class="indeterminate progress-bar"></div>
+    </div>
+</main>
+<footer class="page-footer light-blue lighten-2">
+    <div class="container">
+
+    </div>
+    <div class="footer-copyright light-blue lighten-2">
+        <div class="container">
+            <i class="material-icons left">code</i>
+            Développé en Python avec <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> / <a
+                href="https://pypi.org/project/PyPDF2/">PyPDF2</a>
+            <div class="grey-text text-lighten-4 right">
+                <i class="material-icons left">email</i>
+                <a href="mailto:alban.rousseau9@gmail.com">alban.rousseau9@gmail.com</a>
             </div>
         </div>
-        <div class="col s5"></div>
     </div>
-</div>
-
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
