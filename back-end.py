@@ -23,13 +23,17 @@ def upload_file():
             flash('No file part')
             return redirect(request.url)
         files = request.files.getlist('files')
-        if files:
+        if files and len(files) > 0:
             for file in files:
+                if file.filename == '':
+                    return redirect(request.url)
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             split_and_merge.run(date, int(nb))
             path = "Document_Final.pdf"
             return send_file(path)
+        else:
+            return redirect(request.url)
     else:
         return render_template("split.html")
 

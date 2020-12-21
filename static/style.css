@@ -1,5 +1,8 @@
-.input-container {
+.margin-top {
     margin-top: 250px;
+}
+
+.input-container {
     padding: 50px 50px 5px 50px;
     border-radius: 10px;
 }
