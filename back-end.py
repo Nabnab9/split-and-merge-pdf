@@ -16,6 +16,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+        date = request.form['date']
+        nb = request.form['nb']
         # check if the post request has the file part
         if 'files' not in request.files:
             flash('No file part')
@@ -25,7 +27,7 @@ def upload_file():
             for file in files:
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            split_and_merge.run()
+            split_and_merge.run(date, int(nb))
             path = "Document_Final.pdf"
             return send_file(path, as_attachment=True)
     else:
