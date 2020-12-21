@@ -18,8 +18,8 @@
         </div>
     </nav>
 </div>
-<div class="container input-container z-depth-3 margin-top" id="formulaire">
-    <form enctype=multipart/form-data method="post">
+<div class="container input-container z-depth-3 margin-top" >
+    <form enctype=multipart/form-data method="post" id="formulaire">
         <div class="row">
             <div class="input-field col s5">
                 <i class="material-icons prefix">date_range</i>
@@ -62,24 +62,11 @@
             <div class="col s5"></div>
         </div>
     </form>
-</div>
-
-<div class="container margin-top">
     <div class="row">
         <div class="col s5"></div>
         <div class="col s2">
-            <div class="preloader-wrapper big active " id="loader" style="display: none">
-                <div class="spinner-layer spinner-blue-only">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="gap-patch">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                </div>
+            <div id="loader" class="progress light-blue lighten-2" style="display: none">
+                <div class="indeterminate progress-bar"></div>
             </div>
         </div>
         <div class="col s5"></div>

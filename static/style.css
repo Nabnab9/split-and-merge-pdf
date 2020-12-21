@@ -1,5 +1,9 @@
 .margin-top {
-    margin-top: 250px;
+    margin-top: 215px;
+}
+
+.progress-bar {
+    background-color: white!important;
 }
 
 .input-container {
