@@ -18,7 +18,7 @@
         </div>
     </nav>
 </div>
-<div class="container margin-top">
+<div class="container input-container z-depth-3 ">
     <form enctype=multipart/form-data method="post">
         <div class="row">
             <div class="input-field col s5">
@@ -26,15 +26,15 @@
                 <input placeholder="Sous la forme AAAAMM (ex : 202012)" id="date" name="date" type="text" class="validate">
                 <label for="date">Année + mois</label>
             </div>
-            <div class="col s1"></div>
-            <div class="input-field col s3">
+            <div class="col s2"></div>
+            <div class="input-field col s5">
                 <i class="material-icons prefix">content_copy</i>
                 <input placeholder="4" id="nb" value="4" name="nb" min="1" type="number" class="validate">
                 <label for="nb">Nombre de documents différents</label>
             </div>
         </div>
         <div class="row  valign-wrapper">
-            <div class="col s9">
+            <div class="col s12">
                 <div class="file-field input-field">
                     <div class="btn light-blue lighten-2">
                         <i class="material-icons left">attach_file</i>
@@ -49,13 +49,17 @@
 
                 </div>
             </div>
-            <div class="col s3">
+        </div>
+        <div class="row">
+            <div class="col s5"></div>
+            <div class="col s2">
                 <button class="btn waves-effect waves-light light-blue lighten-2" type="submit" name="action">
                     Générer
                     PDF
                     <i class="material-icons right">send</i>
                 </button>
             </div>
+            <div class="col s5"></div>
         </div>
     </form>
 </div>

@@ -29,7 +29,7 @@ def upload_file():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             split_and_merge.run(date, int(nb))
             path = "Document_Final.pdf"
-            return send_file(path, as_attachment=True)
+            return send_file(path)
     else:
         return render_template("split.html")
 
