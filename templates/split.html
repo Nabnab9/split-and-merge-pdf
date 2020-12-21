@@ -20,13 +20,18 @@
 </div>
 <div class="container margin-top">
     <form enctype=multipart/form-data method="post">
-        <div class="input-field col s6">
-            <input placeholder="Préfix code" id="date" name="date" type="text" class="validate">
-            <label for="date">Préfix code</label>
-        </div>
-        <div class="input-field col s6">
-            <input placeholder="Nombre de document attendu" id="nb" name="nb" type="text" class="validate">
-            <label for="nb">Nombre de document attendu</label>
+        <div class="row">
+            <div class="input-field col s5">
+                <i class="material-icons prefix">date_range</i>
+                <input placeholder="Sous la forme AAAAMM (ex : 202012)" id="date" name="date" type="text" class="validate">
+                <label for="date">Année + mois</label>
+            </div>
+            <div class="col s1"></div>
+            <div class="input-field col s3">
+                <i class="material-icons prefix">content_copy</i>
+                <input placeholder="4" id="nb" value="4" name="nb" min="1" type="number" class="validate">
+                <label for="nb">Nombre de documents différents</label>
+            </div>
         </div>
         <div class="row  valign-wrapper">
             <div class="col s9">

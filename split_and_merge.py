@@ -91,8 +91,6 @@ def run(date, nb_doc_attendu):
         paths = glob.glob("Target/" + "*" + "%s.pdf" % str(c))
         if len(paths) < nb_doc_attendu:
             nb_white_page = nb_doc_attendu - len(paths)
-            print(len(paths))
-            print(c)
             for blank in range(nb_white_page):
                 output = PdfFileWriter()
                 output.insertBlankPage(width=width, height=height)
@@ -121,4 +119,4 @@ def run(date, nb_doc_attendu):
 
 
 if __name__ == "__main__":
-    run('202012', 4)
+    run(date='202012', nb_doc_attendu=4)
