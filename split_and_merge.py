@@ -2,22 +2,13 @@
 
 import glob
 import os
+import re
 
 from PyPDF2 import PdfFileWriter, PdfFileReader, PdfFileMerger
 
-
-def get_num_pages(source_paths):
-    nombre_page_array = []
-    for document_path in source_paths:
-        inputpdf = PdfFileReader(open(document_path, "rb"))
-        print("{0} : {1} pages".format(document_path, str(inputpdf.numPages)))
-        nombre_page_array.append(inputpdf.numPages)
-
-    if sum(nombre_page_array) / len(nombre_page_array) != nombre_page_array[0]:
-        print("Le nombre de page d'un ou plusieur PDF est différent")
-        exit(1)
-    else:
-        return nombre_page_array[0]
+codes = set()
+width = 0
+height = 0
 
 
 def clean():
@@ -40,36 +31,94 @@ def merger(output_path, input_paths):
         pdf_merger.write(fileobj)
 
 
-def write_all_pages(input_path):
+def write_all_pages(input_path, date):
     inputpdf = PdfFileReader(open(input_path, "rb"))
     for i in range(inputpdf.numPages):
+        page = inputpdf.getPage(i)
+        width = page.mediaBox[2]
+        height = page.mediaBox[3]
+        page_content = page.extractText()
+
+        code = get_file_code(page_content, date)
+        codes.add(code)
+
+        doc_type = get_doc_type(page_content)
+
         output = PdfFileWriter()
-        output.addPage(inputpdf.getPage(i))
+        output.addPage(page)
         with open("Target/"
                   + input_path.split("/")[1]
-                  + "_page"
-                  + ("0" if i + 1 < 10 else "")
-                  + "%s.pdf" % (i + 1),
+                  + "_page_"
+                  + doc_type
+                  + "_"
+                  + code
+                  + ".pdf",
                   "wb") as outputStream:
             output.write(outputStream)
 
 
-def run():
+def get_file_code(page_content, date):
+    regex = r'' + date + r'(\d{4})'
+    code_search = re.search(regex, page_content, re.IGNORECASE)
+    code = '0000'
+    if code_search:
+        code = code_search.group(1)
+        # print(code)
+    return code
+
+
+def get_doc_type(page_content):
+    manifest_type = "normal"
+    manifest_type_search = re.search(r'(SUPPLIER MANIFEST)', page_content)
+    if manifest_type_search:
+        manifest_type = "supplier"
+    else:
+        manifest_type_search = re.search(r'(LOGISTIC PARTNER MANIFEST)', page_content)
+        if manifest_type_search:
+            manifest_type = "logistic_partner"
+    return manifest_type
+
+
+def run(date, nb_doc_attendu):
+
     source_pdf_files = glob.glob("Source/*.pdf")
 
-    number_of_pages = get_num_pages(source_pdf_files)
-
     for j in source_pdf_files:
-        write_all_pages(j)
+        write_all_pages(j, date)
 
-    for p in range(1, number_of_pages + 1):
-        paths = glob.glob("Target/" + "*_page" + ("0" if p < 10 else "") + "%s.pdf" % str(p))
+    for c in codes:
+
+        paths = glob.glob("Target/" + "*" + "%s.pdf" % str(c))
+        if len(paths) < nb_doc_attendu:
+            nb_white_page = nb_doc_attendu - len(paths)
+            print(len(paths))
+            print(c)
+            for blank in range(nb_white_page):
+                output = PdfFileWriter()
+                output.insertBlankPage(width=width, height=height)
+                with open("Target/"
+                          + "page_"
+                          + "blank"
+                          + "_"
+                          + str(blank)
+                          + "_"
+                          + c
+                          + ".pdf",
+                          "wb") as outputStream:
+                    output.write(outputStream)
+
+        paths = glob.glob("Target/" + "*" + "%s.pdf" % str(c))
         paths.sort()
-        output_file_path = "Merge/Page" + ("0" if p < 10 else "") + str(p) + ".pdf"
+        output_file_path = "Merge/Page_" + str(c) + ".pdf"
+
         merger(output_file_path, paths)
 
-    paths = glob.glob('Merge/Page*.pdf')
+    paths = glob.glob('Merge/Page_*.pdf')
     paths.sort()
     merger('Document_Final.pdf', paths)
 
     clean()
+
+
+if __name__ == "__main__":
+    run('202012', 4)
