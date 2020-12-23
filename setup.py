@@ -7,5 +7,5 @@ setup(
     author='Alban Rousseau',
     author_email='alban.rousseau9@gmail.com',
     packages=['split-and-merge-pdf'],  # same as name
-    install_requires=['setuptools', 'Flask', 'Werkzeug', 'PyPDF2'],  # external packages as dependencies
+    install_requires=['setuptools', 'Flask', 'Werkzeug', 'PyPDF2', 'ordered-enum'],  # external packages as dependencies
 )

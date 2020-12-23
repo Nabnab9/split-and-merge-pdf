@@ -29,7 +29,8 @@ def upload_file():
                     return redirect(request.url)
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            split_and_merge.run(date, int(nb))
+            split_and_merge_class = split_and_merge.SplitAndMergePdf(date, int(nb))
+            split_and_merge_class.run()
             path = "Document_Final.pdf"
             return send_file(path)
         else:

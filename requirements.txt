@@ -2,3 +2,4 @@ setuptools~=45.2.0
 Flask~=1.1.2
 Werkzeug~=1.0.1
 PyPDF2~=1.26.0
+ordered-enum=0.0.6
