@@ -25,11 +25,11 @@ class PagePdf:
     page_text_content: str
     page_type: PageType
 
-    def __init__(self, page_object, date):
+    def __init__(self, page_object):
         self.page_object = page_object
         self.page_text_content = page_object.extractText()
-        self.page_code = self.get_code(date)
         self.page_type = self.get_type()
+        self.page_code = self.get_code()
 
     def search(self, str_to_find: str) -> bool:
         return str_to_find in self.page_text_content
@@ -45,8 +45,8 @@ class PagePdf:
             return PageType.PALLET
         return PageType.OTHER
 
-    def get_code(self, date) -> str:
-        regex = r'' + date + r'(\d{4})'
+    def get_code(self) -> str:
+        regex = r'20\d{4}(\d{4})'
         code_search = re.search(regex, self.page_text_content, re.IGNORECASE)
         code = '0000'
         if code_search:
@@ -72,12 +72,10 @@ def clean():
 
 
 class SplitAndMergePdf:
-    date: str
     nb_doc_expected: int
     lots: Dict[str, Set[PagePdf]]
 
-    def __init__(self, date, nb_doc_expected):
-        self.date = date
+    def __init__(self, nb_doc_expected):
         self.nb_doc_expected = nb_doc_expected
         self.lots = {}
 
@@ -85,7 +83,7 @@ class SplitAndMergePdf:
         input_pdf = PdfFileReader(open(input_path, "rb"))
         for i in range(input_pdf.numPages):
             page = input_pdf.getPage(i)
-            page_pdf = PagePdf(page_object=page, date=self.date)
+            page_pdf = PagePdf(page_object=page)
 
             if page_pdf.page_code not in self.lots:
                 self.lots[page_pdf.page_code] = set()
@@ -116,5 +114,5 @@ class SplitAndMergePdf:
 
 
 if __name__ == "__main__":
-    split_and_merge_pdf = SplitAndMergePdf(date='202012', nb_doc_expected=4)
+    split_and_merge_pdf = SplitAndMergePdf(nb_doc_expected=4)
     split_and_merge_pdf.run()
