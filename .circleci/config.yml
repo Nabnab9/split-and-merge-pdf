@@ -1,21 +1,15 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@0.2.1
-
 jobs:
-  build-and-test:
-    executor: python/default
+  deploy:
+    machine:
+      enabled: true
     steps:
-      - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
       - run:
-          command: ./manage.py test
-          name: Test
+          name: Deploy Over SSH
+          command: ssh $SSH_USER@$SSH_HOST 'sudo salt-call --local state.apply'
 
 workflows:
   main:
     jobs:
-      - build-and-test
+      - deploy
