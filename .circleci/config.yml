@@ -5,10 +5,12 @@ jobs:
     machine:
       enabled: true
     steps:
+      - checkout
       - run:
           name: Deploy Over SSH
           #command: ssh $SSH_USER@$SSH_HOST 'sudo salt-call --local state.apply'
-          command: ssh $SSH_USER@$SSH_HOST 'ls -la'
+          command:
+            - ssh $SSH_USER@$SSH_HOST 'ls -la'
 
 workflows:
   main:
