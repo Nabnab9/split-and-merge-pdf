@@ -16,4 +16,6 @@ jobs:
 workflows:
   main:
     jobs:
-      - deploy
+      - deploy:
+          type: approval
+
