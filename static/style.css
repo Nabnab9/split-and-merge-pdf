@@ -2,6 +2,14 @@
     margin-top: 150px;
 }
 
+.align-center {
+    text-align: center;
+}
+
+.title {
+    font-size: 30px;
+}
+
 body {
     display: flex;
     min-height: 100vh;
