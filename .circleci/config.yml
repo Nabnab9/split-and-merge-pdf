@@ -7,13 +7,13 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "e0:c8:ef:05:c9:bb:ed:bd:5a:40:c6:3f:d5:47:59:05"
+            - "9f:6d:a9:1d:01:7a:dc:51:cf:2c:98:d3:7d:5c:99:28"
       - checkout
-      - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-      - eval $(ssh-agent -s)
-      - ssh-add <(echo "$SSH_PRIVATE_KEY")
-      - mkdir -p ~/.ssh
-      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+#      - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+#      - eval $(ssh-agent -s)
+#      - ssh-add <(echo "$SSH_PRIVATE_KEY")
+#      - mkdir -p ~/.ssh
+#      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
       - run:
           name: Deploy Over SSH
           #command: ssh $SSH_USER@$SSH_HOST 'sudo salt-call --local state.apply'
