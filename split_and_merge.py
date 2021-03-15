@@ -12,9 +12,9 @@ from typing import Dict, Set
 
 
 class PageType(OrderedEnum):
-    KANBAN = 1
-    SUPPLIER = 2
-    LOGISTIC_PARTNER = 3
+    SUPPLIER = 1
+    LOGISTIC_PARTNER = 2
+    KANBAN = 3
     PALLET = 4
     OTHER = 5
 
