@@ -46,7 +46,7 @@ class PagePdf:
         return PageType.OTHER
 
     def get_code(self) -> str:
-        regex = r'20\d{4}(\d{4})'
+        regex = r'202\d{3}(\d{4})'
         code_search = re.search(regex, self.page_text_content, re.IGNORECASE)
         code = '0000'
         if code_search:
