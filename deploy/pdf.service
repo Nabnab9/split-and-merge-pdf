@@ -1,0 +1,17 @@
+[Unit]
+Description=Pdf service
+After=syslog.target network.target
+
+[Service]
+
+Type=simple
+WorkingDirectory=/opt/split-and-merge-pdf/
+ExecStart=/usr/bin/python3 /opt/split-and-merge-pdf/back-end.py
+
+User=banban
+Group=banban
+Restart=always
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
